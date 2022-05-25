@@ -21,12 +21,19 @@ function addHerokuRemoteCommand(config) {
   return `heroku git:remote --app ${heroku_app_name}`
 }
 
+function deployToHerokuCommand() {
+  // TODO: Add support for other branches
+  return `git push heroku master:refs/heads/master`
+}
+
 async function main() {
   const config = {
     heroku_api_key: core.getInput('heroku_api_key'),
     heroku_email: core.getInput('heroku_email'),
     heroku_app_name: core.getInput('heroku_app_name'),
   }
+
+  core.debug(`Config: ${JSON.stringify(config)}`)
 
   try {
     // Check if Repo clone is shallow
@@ -52,6 +59,12 @@ async function main() {
     })
 
     core.info('Added git remote heroku')
+
+    await execSync(deployToHerokuCommand(), {
+      stdio: 'inherit',
+    })
+
+    core.info(`${config.heroku_app_name} successfully deployed on heroku`)
   } catch (error) {
     core.setFailed(error.toString())
   }
