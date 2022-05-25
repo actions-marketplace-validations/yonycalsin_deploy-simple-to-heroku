@@ -23,7 +23,7 @@ function addHerokuRemoteCommand(config) {
 
 function deployToHerokuCommand() {
   // TODO: Add support for other branches
-  return `git push heroku master:refs/heads/master`
+  return `git push heroku master:refs/heads/master &>/dev/null &`
 }
 
 async function main() {
