@@ -1,0 +1,21 @@
+name: 'Deploy Simple To Heroku'
+description: 'This is a simple and concise Github Action, and powerful because it doesn't wait for the heroku response to finish the action, it just pushes the commits and the action finishes, this is great when you want to save the minutes of github-actions.'
+branding:
+  icon: "upload-cloud"
+  color: "orange"
+inputs:
+  heroku_api_key:
+    description: "This will be used for authentication. You can find it in your heroku homepage account settings"
+    required: true
+  heroku_email:
+    description: "Email that you use with heroku"
+    required: true
+  heroku_app_name:
+    description: "The appname to use for deploying/updating"
+    required: true
+outputs:
+  status:
+    description: "The success/failure of the action of pushing changes to the remote heroku repository"
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
