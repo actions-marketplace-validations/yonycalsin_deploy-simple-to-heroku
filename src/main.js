@@ -65,6 +65,8 @@ async function main() {
     })
 
     core.info(`${config.heroku_app_name} successfully deployed on heroku`)
+
+    core.setOutput('status', `${config.heroku_app_name} successfully deployed on heroku`)
   } catch (error) {
     core.setFailed(error.toString())
   }
