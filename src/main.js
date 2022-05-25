@@ -14,13 +14,32 @@ function createNetrcFileCommand(config) {
   EOF`
 }
 
+function addHerokuRemoteCommand(config) {
+  const { heroku_app_name } = config
+
+  // GitHub Actions does come with the heroku cli pre-installed
+  return `heroku git:remote --app ${heroku_app_name}`
+}
+
 async function main() {
+  const config = {
+    heroku_api_key: core.getInput('heroku_api_key'),
+    heroku_email: core.getInput('heroku_email'),
+    heroku_app_name: core.getInput('heroku_app_name'),
+  }
+
   try {
     execSync(createNetrcFileCommand(config), {
       stdio: 'inherit',
     })
 
     core.info('Successfully logged into heroku')
+
+    execSync(addHerokuRemoteCommand(config), {
+      stdio: 'inherit',
+    })
+
+    core.info('Added git remote heroku')
   } catch (error) {
     core.setFailed(error.toString())
   }
