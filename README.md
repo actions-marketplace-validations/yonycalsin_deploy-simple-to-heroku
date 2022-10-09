@@ -60,7 +60,7 @@ The action comes with additional options that you can use to configure your proj
 | Name            | Required | Description                                                                                    | Example              |
 | --------------- | -------- | ---------------------------------------------------------------------------------------------- | -------------------- |
 | heroku_api_key  | true     | This will be used for authentication. You can find it in your heroku homepage account settings | \*\*\*               |
-| heroku_email    | true     | Email that you use with heroku                                                                 | hello@yonycalsin.com |
+| heroku_email    | true     | Email that you use with heroku                                                                 | hello@domain.com |
 | heroku_app_name | true     | The appname to use for deploying                                                               | demo-next-app        |
 
 ## License
